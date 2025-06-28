@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <string.h>
 
+#include "../header/queue.h"
+
 // Initialisation de la file d'attente
 void initQueue(Queue *q) {
     q->first = NULL;

@@ -6,12 +6,12 @@ typedef struct Client {
     int temps_arrivee;
     int temps_traitement;
     struct Client *suivant;
-};
+} Client;
 
 typedef struct Queue {
     Client *first;
     Client *last;
-};
+} Queue;
 
 void initQueue(Queue *q);
 int isEmpty(Queue *q);
