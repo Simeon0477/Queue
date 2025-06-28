@@ -15,6 +15,7 @@ int main() {
     char nomFichier[] = "file_attente.txt";
 
     while (1) {
+        printf("\033[35m******** Simulateur de file d'attente ******** \n\n\033[0m");
         printf("\nMenu:\n");
         printf("1. Charger la file d'attente depuis un fichier\n");
         printf("2. Ajouter des clients aléatoires\n");
