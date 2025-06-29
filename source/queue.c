@@ -23,10 +23,10 @@ void enqueue(Queue *q, Client *client) {
         q->first = client;
         q->last = client;
     } else {
-        q->last->suivant = client;
+        q->last->next = client;
         q->last = client;
     }
-    client->suivant = NULL;
+    client->next = NULL;
 }
 
 // Retrait d'un client de la queue
@@ -36,19 +36,30 @@ Client* dequeue(Queue *q) {
         return NULL;
     }
     Client *client = q->first;
-    q->first = q->first->suivant;
+    q->first = q->first->next;
     return client;
 }
 
 // Génération d'un client aléatoire
 Client* generateClient(int id) {
-    srand(time(NULL));
     Client *client = (Client *)malloc(sizeof(Client));
     client->id = id;
-    client->temps_arrivee = rand() % 10;
-    client->temps_traitement = rand() % 5 + 1; 
-    client->suivant = NULL;
+    client->temps_traitement = rand() % 10 + 1; 
+    client->next = NULL;
     return client;
+}
+
+//Calcul du temps d'attente total
+int totalTime(Queue *q) {
+    int total = 0;
+    Client *current = q->first;
+
+    while (current != NULL) {
+        total += current->temps_traitement; 
+        current = current->next;
+    }
+
+    return total;
 }
 
 // Sauvegarde de la file d'attente
@@ -61,12 +72,12 @@ void saveQueue(Queue *q, const char *nomFichier) {
 
     Client *current = q->first;
     while (current != NULL) {
-        fprintf(file, "%d %d %d\n", current->id, current->temps_arrivee, current->temps_traitement);
-        current = current->suivant;
+        fprintf(file, "%d %d\n", current->id, current->temps_traitement);
+        current = current->next;
     }
 
     fclose(file);
-    printf("File d'attente sauvegardée dans %s.\n", nomFichier);
+    printf("File d'attente sauvegardée.\n");
 }
 
 // Chargement la file d'attente
@@ -80,7 +91,7 @@ void loadQueue(Queue *q, const char *nomFichier) {
     Client *client;
     while (!feof(file)) {
         client = (Client *)malloc(sizeof(Client));
-        if (fscanf(file, "%d %d %d", &client->id, &client->temps_arrivee, &client->temps_traitement) == 3) {
+        if (fscanf(file, "%d %d", &client->id, &client->temps_traitement) == 3) {
             enqueue(q, client);
         } else {
             free(client);
@@ -88,5 +99,4 @@ void loadQueue(Queue *q, const char *nomFichier) {
     }
 
     fclose(file);
-    printf("File d'attente chargée depuis %s.\n", nomFichier);
 }
