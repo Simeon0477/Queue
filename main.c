@@ -56,7 +56,7 @@ int main() {
                 break;
             case 3:
                 printf("\n\033[32m3 - Calculer le temps d'attente total \n\n\033[0m");
-                printf("Le temps d'attente total est : %d \n", totalTime(&queue));
+                printf("Le temps d'attente total est : %d minutesS\n", totalTime(&queue));
                 break;
             case 4:
                 // Libérer la mémoire restante
