@@ -12,5 +12,5 @@ Simuler une file d’attente pour une banque ou un supermarché, gérant l'arriv
 
 ## Structure du Projet
 
-- **Client** : Structure représentant un client avec des attributs comme le nom et le temps d'arrivée.
+- **Client** : Structure représentant un client avec les attributs nom et temps d'attente.
 - **File d'Attente** : Implémentation d'une file d'attente utilisant des opérations d'enregistrement et de retrait.
