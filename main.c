@@ -59,7 +59,6 @@ int main() {
                 printf("Le temps d'attente total est : %d minutesS\n", totalTime(&queue));
                 break;
             case 4:
-                // Libérer la mémoire restante
                 while (!isEmpty(&queue)) {
                     Client *client = dequeue(&queue);
                     free(client);
